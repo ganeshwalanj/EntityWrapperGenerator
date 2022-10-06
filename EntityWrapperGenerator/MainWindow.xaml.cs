@@ -23,7 +23,6 @@ namespace EntityWrapperGenerator
             this.FontFamily = new FontFamily(new Uri("pack://application:,,,/JetBrainsMono-Medium"), "JetBrainsMono");
             InitializeComponent();
             Loaded += OnWindowsLoaded;
-            Console.WriteLine(EntityWrapperSettings.Default.EntitiesConfig);
         }
 
         private void OnWindowsLoaded(object sender, RoutedEventArgs e)
