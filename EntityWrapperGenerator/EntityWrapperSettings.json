@@ -1,0 +1,11 @@
+{
+  "ShowInstruction": false,
+  "ShellDebugFolderPath": "C:\\Vships\\Framework\\Source\\VShips.Framework.Shell\\bin\\Debug",
+  "EntitiesConfig": [
+    {
+      "Namespace": "VShips.Framework.Common.Model.Crew",
+      "ViewModelNamespace": "VShips.Framework.Crew.ViewModel.EntityWrapper",
+      "ViewModelSaveFolderPath": "C:\\Vships\\Framework\\Source\\VShips.Framework.Crew\\ViewModel\\EntityWrapper\\Generated"
+    }
+  ]
+}

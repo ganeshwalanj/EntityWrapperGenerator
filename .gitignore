@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/EntityWrapperGenerator/bin/Release
+/EntityWrapperGenerator/obj/Debug
+/EntityWrapperGenerator/obj/Release
+/EntityWrapperGenerator/bin/Debug
+/.vs/EntityWrapperGenerator
