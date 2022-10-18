@@ -99,7 +99,6 @@ namespace EntityWrapperGenerator.ViewModel
             {
                 if (SetProperty(ref _selectedType, value))
                 {
-                    RaiseCommandsNotifyCanExecuteChanged();
                     if (SelectedType != null && EntityWrapperSettings.Default.EntitiesConfig != null && EntityWrapperSettings.Default.EntitiesConfig.Any(x => x.Namespace == SelectedType.Entity.Namespace))
                     {
                         _selectedTypeConfig = EntityWrapperSettings.Default.EntitiesConfig.First(x => x.Namespace == SelectedType.Entity.Namespace);
@@ -108,6 +107,8 @@ namespace EntityWrapperGenerator.ViewModel
                     {
                         _selectedTypeConfig = null;
                     }
+                    GeneratedCode = null;
+                    RaiseCommandsNotifyCanExecuteChanged();
                 }
             }
         }
