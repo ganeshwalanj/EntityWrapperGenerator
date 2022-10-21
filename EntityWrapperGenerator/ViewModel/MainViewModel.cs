@@ -192,7 +192,7 @@ namespace EntityWrapperGenerator.ViewModel
 
             if (item != null && !string.IsNullOrWhiteSpace(item.ClassName) && !string.IsNullOrWhiteSpace(SearchText))
             {
-                return item.ClassName.ToLower().StartsWith(SearchText.ToLower());
+                return item.ClassName.ToLower().Contains(SearchText.ToLower());
             }
 
             return true;
