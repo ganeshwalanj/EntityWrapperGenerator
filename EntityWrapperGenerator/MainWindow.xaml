@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         Background="#CCCCCC"
+        FontFamily="./#JetBrains Mono"
         Height="720"
         Width="1280"
         d:DataContext="{d:DesignInstance, Type=vm:MainViewModel, IsDesignTimeCreatable=True}">
@@ -85,7 +86,6 @@
         </Grid.ColumnDefinitions>
         <TextBox x:Name="TextBoxSearchClass"
                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                 FontWeight="Medium"
                  Foreground="#E6E6E6"
                  Background="#1E1E1E"
                  FontSize="13"
@@ -96,7 +96,6 @@
                       Grid.Row="1">
             <ListBox ItemsSource="{Binding TypeList}"
                      SelectedItem="{Binding SelectedType}"
-                     FontWeight="Medium"
                      FontSize="13"
                      Foreground="#E6E6E6"
                      Background="#000000">
@@ -132,8 +131,7 @@
             <Button x:Name="ButtonGenerateClass"
                     Command="{Binding GenerateClassCommand}"
                     Style="{DynamicResource CustomButtonStyle}"
-                    FontWeight="Medium"
-                    FontSize="16"
+                    FontSize="15"
                     Padding="4"
                     BorderBrush="#000000"
                     Foreground="#E6E6E6"
@@ -143,8 +141,7 @@
                     Command="{Binding CopyToClipboardCommand}"
                     Style="{DynamicResource CustomButtonStyle}"
                     Margin="4 0 0 0"
-                    FontWeight="Medium"
-                    FontSize="16"
+                    FontSize="15"
                     Padding="4"
                     BorderBrush="#000000"
                     Foreground="#E6E6E6"
@@ -155,8 +152,7 @@
                     Command="{Binding SaveToFileCommand}"
                     Style="{DynamicResource CustomButtonStyle}"
                     Margin="4 0 0 0"
-                    FontWeight="Medium"
-                    FontSize="16"
+                    FontSize="15"
                     Padding="4"
                     BorderBrush="#000000"
                     Foreground="#E6E6E6"
@@ -173,7 +169,6 @@
         -->
         <TextBox x:Name="TextBoxGeneratedCode"
                  Text="{Binding GeneratedCode}"
-                 FontWeight="Medium"
                  Foreground="#E6E6E6"
                  Background="#1E1E1E"
                  FontSize="14"

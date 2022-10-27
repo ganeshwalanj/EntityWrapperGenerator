@@ -19,9 +19,11 @@ namespace EntityWrapperGenerator
         MainViewModel _mainVM = new MainViewModel();
         public MainWindow()
         {
-            DataContext = _mainVM;
-            this.FontFamily = new FontFamily(new Uri("pack://application:,,,/JetBrainsMono-Medium"), "JetBrainsMono");
             InitializeComponent();
+
+            DataContext = _mainVM;
+
+
             Loaded += OnWindowsLoaded;
         }
 
