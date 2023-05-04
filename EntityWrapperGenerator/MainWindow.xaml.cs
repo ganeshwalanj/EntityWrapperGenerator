@@ -1,12 +1,14 @@
 ﻿using EntityWrapperGenerator.ViewModel;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace EntityWrapperGenerator
@@ -48,30 +50,56 @@ namespace EntityWrapperGenerator
             }
         }
 
-        private void OnFolderSelection(string folderPath) 
+        private List<FileInfo> GetAllDLLs(DirectoryInfo dirInfo, List<FileInfo> files = null) 
         {
-            _mainVM.FolderPath = folderPath;
-            string fileName = folderPath + "\\VShips.Framework.Common.dll";
-            if (File.Exists(fileName))
+            if (files == null)
             {
-                try
-                {
-                    var dll = Assembly.LoadFrom(fileName);
+                files = new List<FileInfo>();
+            }
 
-                    var types = dll.GetTypes().Where(t => t.Namespace != null && t.Namespace.StartsWith("VShips.Framework.Common.Model")
-                                                          && !t.IsGenericType && !t.IsNested && !t.IsInterface).ToList();
+            files.AddRange(dirInfo.GetFiles().Where(f => Path.GetExtension(f.FullName).ToLower() == ".dll" && Path.GetFileNameWithoutExtension(f.FullName).StartsWith("VShips")));
 
-                    _mainVM.AddItems(types.Select(t => new TypeViewModel { ClassName = t.Name, Entity = t }).OrderBy(t => t.ClassName).ToList());
-                }
-                catch (Exception ex)
+            try
+            {
+                foreach (DirectoryInfo dir in dirInfo.GetDirectories())
                 {
-                    MessageBox.Show(ex.Message);
-                    Close();
+                    GetAllDLLs(dir, files);
                 }
             }
-            else
+            catch { }
+
+            return files;
+        }
+
+        private void OnFolderSelection(string folderPath)
+        {
+            _mainVM.FolderPath = folderPath;
+
+            try
             {
-                MessageBox.Show("VShips.Framework.Common.dll is Not Found!");
+                var dlls = GetAllDLLs(new DirectoryInfo(folderPath));
+                List<Assembly> asms = new List<Assembly>();
+                foreach (var file in dlls)
+                {
+                    try
+                    {
+                        var dll = Assembly.LoadFrom(file.FullName);
+
+                        if (dll.GetReferencedAssemblies().Any(asm => asm.Name.Contains("Spire")))
+                        {
+                            asms.Add(dll);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                _mainVM.AddItems(asms.Select(asm => new TypeViewModel { ClassName = asm.FullName }).ToList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 Close();
             }
         }
